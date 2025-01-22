@@ -1,5 +1,7 @@
 package com.example.spring;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -31,6 +33,11 @@ public class Libro {
         this.isbn = isbn;
         this.titulo = titulo;
         this.autor = autor;
+    }
+
+    @JsonCreator
+    public Libro(@JsonProperty("isbn") String isbn) {
+        this.isbn = isbn;
     }
 
     public Libro() {

@@ -12,12 +12,13 @@ import java.util.List;
 @RequestMapping("/ejemplares")
 public class EjemplarControllerMOCK {
     EjemplarRepository ejemplarRepository;
-
+    LibrosRepository librosRepository;
     public EjemplarControllerMOCK() {
     }
     @Autowired
-    public EjemplarControllerMOCK(EjemplarRepository ejemplarRepository) {
+    public EjemplarControllerMOCK(EjemplarRepository ejemplarRepository, LibrosRepository librosRepository) {
         this.ejemplarRepository = ejemplarRepository;
+        this.librosRepository= librosRepository;
     }
     //GET --> Todos los ejemplares
     @GetMapping
@@ -36,9 +37,16 @@ public class EjemplarControllerMOCK {
     //POST --> Insertar Ejemplares
     @PostMapping("/ejemplar")
     public ResponseEntity<Ejemplar> add(@Valid @RequestBody Ejemplar ejemplar) {
-        System.out.println("Entra aqui");
-        Ejemplar e = this.ejemplarRepository.save(ejemplar);
-        return ResponseEntity.ok().body(e);
+        Libro libro = librosRepository.findByIsbn(ejemplar.getIsbn().getIsbn());
+        if (libro == null) {
+            return ResponseEntity.badRequest().body(null);  // o un error adecuado si el libro no existe
+        }
+
+        ejemplar.setIsbn(libro);  // Asocia el libro encontrado al ejemplar
+        ejemplarRepository.save(ejemplar);  // Guarda el ejemplar
+
+        return ResponseEntity.created(null).body(ejemplar);  // Devuelve el ejemplar creado
+
     }
     //UPDATE
     @PutMapping("/{id}")
@@ -53,4 +61,5 @@ public class EjemplarControllerMOCK {
         String mensaje = "Ejemplar con id " + id + " eliminado";
         return ResponseEntity.ok().body(mensaje);
     }
+
 }
