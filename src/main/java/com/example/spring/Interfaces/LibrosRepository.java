@@ -1,6 +1,6 @@
-package com.example.spring;
+package com.example.spring.Interfaces;
 
-import jakarta.validation.constraints.Size;
+import com.example.spring.Clases.Libro;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LibrosRepository extends JpaRepository<Libro,String> {
