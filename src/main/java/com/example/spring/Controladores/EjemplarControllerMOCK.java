@@ -1,6 +1,9 @@
-package com.example.spring;
+package com.example.spring.Controladores;
 
-import jakarta.persistence.Cacheable;
+import com.example.spring.Clases.Ejemplar;
+import com.example.spring.Clases.Libro;
+import com.example.spring.Interfaces.EjemplarRepository;
+import com.example.spring.Interfaces.LibrosRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

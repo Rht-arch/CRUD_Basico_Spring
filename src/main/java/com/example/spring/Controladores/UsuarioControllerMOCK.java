@@ -1,6 +1,7 @@
-package com.example.spring;
+package com.example.spring.Controladores;
 
-import jakarta.transaction.Transactional;
+import com.example.spring.Clases.Usuario;
+import com.example.spring.Interfaces.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;

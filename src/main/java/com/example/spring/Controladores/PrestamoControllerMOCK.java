@@ -1,7 +1,8 @@
-package com.example.spring;
+package com.example.spring.Controladores;
 
+import com.example.spring.Clases.Prestamo;
+import com.example.spring.Interfaces.PrestamoRepository;
 import jakarta.validation.Valid;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
