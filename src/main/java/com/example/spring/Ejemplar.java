@@ -2,7 +2,9 @@ package com.example.spring;
 
 import com.example.spring.Libro;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -23,14 +25,18 @@ public class Ejemplar {
     private Integer id;
 
     @NotNull
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "isbn", nullable = false)
     private Libro isbn;
 
+    @NotNull
+    @NotBlank
     @ColumnDefault("'Disponible'")
     @Lob
     @Column(name = "estado")
+    @Pattern(regexp = "^(Disponible|Prestado|Dañado)$")
     private String estado;
 
 

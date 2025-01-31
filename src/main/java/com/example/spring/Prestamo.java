@@ -1,7 +1,9 @@
 package com.example.spring;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
@@ -9,8 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
 @Entity
 public class Prestamo {
     @Id
@@ -18,32 +19,30 @@ public class Prestamo {
     private Integer id;
 
     @NotNull
+    @NotBlank
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
     @NotNull
+    @NotBlank
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "ejemplar_id", nullable = false)
     private Ejemplar ejemplar;
 
     @NotNull
+    @NotBlank
     @Column(name = "fechaInicio", nullable = false)
     private LocalDate fechaInicio;
 
     @NotNull
+    @NotBlank
     @Column(name = "fechaDevolucion", nullable = false)
     private LocalDate fechaDevolucion;
 
-    public Prestamo(Integer id, Usuario usuario, Ejemplar ejemplar, LocalDate fechaInicio,LocalDate fechaDevolucion) {
-        this.id = id;
-        this.usuario = usuario;
-        this.ejemplar = ejemplar;
-        this.fechaInicio = fechaInicio;
-        this.fechaDevolucion = fechaDevolucion;
-    }
+
 
     public Prestamo() {
 
